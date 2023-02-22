@@ -10,7 +10,7 @@ use PhpParser\Node\Expr\FuncCall;
 class AjaxController extends Controller
 {
    public function index(){
-       return view('ajax.index'); 
+       return view('ajax.index');
    }
 
    public function allData(){
@@ -33,13 +33,13 @@ class AjaxController extends Controller
        return response()->json($store);
    }
 
-//    -------------- edit data ---------------
+
    public function editData($id){
        $data = Teacher::findOrFail($id);
        return response()->json($data);
    }
 
-//    ------------- update data ----------
+
    public function updateData(Request $request,$id){
             $request->validate([
                 'name' => 'required|min:4',

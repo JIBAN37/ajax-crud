@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-      {{ method_field('PATCH') }}
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Ajax Crud</title>
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -91,7 +90,6 @@
             }
         })
 
-        // ---------------view data ------------
         function allData() {
             $.ajax({
                 type: "GET",
@@ -118,9 +116,8 @@
             })
         }
         allData();
-        // --------- end all data ---------
 
-        // --------- data will be clear here ---------
+
         function clearData() {
             $('#name').val('');
             $('#title').val('');
@@ -129,9 +126,7 @@
             $('#titleError').text('');
             $('#instituteError').text('');
         }
-        // --------- end data will be clear here ---------
 
-        // ----------- data data -------------
         function addData() {
             var name = $('#name').val();
             var title = $('#title').val();
@@ -158,9 +153,9 @@
                         type: 'success',
                         title: 'Data Added Success'
                     });
-                    // end alert
+
                 },
-                // start error
+
                 error: function(error) {
                     $('#nameError').text('');
                     $('#titleError').text('');
@@ -171,13 +166,12 @@
                     $('#instituteError').text(error.responseJSON.errors.institute);
 
                 }
-                // end error
+
 
             });
 
         }
 
-        // --------------- edit data -------------
         function editData(id) {
             $('#add').hide();
             $('#update').show();
@@ -186,7 +180,7 @@
             $.ajax({
                 data: "GET",
                 dataType: "json",
-                url: "/teacher/edit/" + id,
+                url: "{{ url('teacher/edit') }}/" + id,
                 success: function(data) {
                     $('#id').val(data.id);
                     $('#name').val(data.name);
@@ -197,7 +191,7 @@
 
         }
 
-        // ---------- update Data -----------
+
         function updateData() {
             var id = $('#id').val();
             var name = $('#name').val();
@@ -212,7 +206,7 @@
                     title: title,
                     institute: institute
                 },
-                url: "/ teacher/update/" + id,
+                url: "/teacher/update/" + id,
                 success: function() {
                     allData();
                     clearData();
@@ -230,9 +224,9 @@
                         type: 'success',
                         title: 'Data Update Success'
                     });
-                    // end alert
+
                 },
-                // start error
+
                 error: function(error) {
                     $('#nameError').text('');
                     $('#titleError').text('');
@@ -243,13 +237,13 @@
                     $('#instituteError').text(error.responseJSON.errors.institute);
 
                 }
-                // end error
+
             })
         }
 
         function deleteData(id) {
 
-            // var link = $(this).attr("href");
+
             swal({
                     title: "Are You Shure To Delete?",
                     text: "Once deleted, you will not be able to recover this imaginary file!",
@@ -290,15 +284,7 @@
                     }
                 });
 
-            // $.ajax({
-            //   type: "GET",
-            //   dataType: "json",
-            //   url: "/teacher/destroy/"+id,
-            //   success: function(response){
-            //     allData();
-            //     console.log('data deleted');
-            //   }
-            // })
+
         }
     </script>
 </body>
